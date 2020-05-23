@@ -114,6 +114,7 @@ addLocation() {
   {
     return;
   }
+  console.log("this.state",this.state)
 let data = {
   locationName: this.addLocationForm.value.locationName?this.addLocationForm.value.locationName:"",
   phoneNumber: this.phoneNumber,
@@ -125,7 +126,7 @@ let data = {
   facilityTime: this.time?this.time:{},
   appointmentPool: $("#tag").val(),
   city: this.addLocationForm.value.city?this.addLocationForm.value.city:"",
-  state: this.state?this.state:"",   
+  state: this.state,   
 }
  var self =this
  this.db.openDatabase(1,  evt => {
@@ -191,6 +192,8 @@ deleteLocation(id){
 
 //************************************************** Edit ***************************************** */
 //***********************Patch data ****************************** */
+stateId
+stateName
 edit(data){
 this.getStates()
 this.editLocationForm.patchValue({
@@ -201,13 +204,13 @@ this.editLocationForm.patchValue({
   city: data.city,
   zipCode: data.zipCode,
   timeZone: data.timeZone
-})
-// var elt = $('input')
-//$('#tag1').val(data.appointmentPool) 
+}) 
 $('#tag1').tagsinput('add', data.appointmentPool)
 this.phoneNumber = data.phoneNumber,
 this.item = data.timeZone
-this.selectedItems = [data.state]
+this.stateId = data.state.id
+this.stateName = data.state.name
+this.selectedItems = [{id:this.stateId,name:this.stateName}]
 this.id = data.id
 this.sunTo = data.facilityTime.sunTo
 this.sunTimeTo = data.facilityTime.sunTimeTo

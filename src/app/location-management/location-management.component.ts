@@ -79,6 +79,8 @@ export class LocationManagementComponent implements OnInit {
     });
 
     this.submitted = false;
+    this.isAllApplied = false
+
     //*****************************Add form ******************* */
     this.addLocationForm = this.formBuilder.group({
       locationName: ['',[Validators.required]],
@@ -195,7 +197,8 @@ deleteLocation(id){
 stateId
 stateName
 edit(data){
-  $('#tag1').tagsinput('removeAll');
+this.isAllApplied = false
+$('#tag1').tagsinput('removeAll');
 this.getStates()
 this.editLocationForm.patchValue({
   locationName: data.locationName,
@@ -284,6 +287,7 @@ self.db.update('location', data).then(
 
 //************************************** Reset **************************** */
 reset(){
+  this.isAllApplied = false
   this.addLocationForm = this.formBuilder.group({
     locationName: ['',[Validators.required]],
     suitNo: ['',],
@@ -360,6 +364,29 @@ onItemSelect(item: any) {
 
 //********************************************** Add Facility ************************** */
 addFacilityTime() {
+  if(!this.isAllApplied){
+  if(this.sunActive){
+    this.timeValidator(this.sunTo,this.sunFrom,this.sunTimeTo,this.sunTimeFrom)
+  }
+  if(this.monActive){
+    this.timeValidator(this.monTo,this.monFrom,this.monTimeTo,this.monTimeFrom)
+  }  
+  if(this.tueActive){
+    this.timeValidator(this.tueTo,this.tueFrom,this.tueTimeTo,this.tueTimeFrom)
+  }  
+  if(this.wedActive){
+    this.timeValidator(this.wedTo,this.wedFrom,this.wedTimeTo,this.wedTimeFrom)
+  }  
+  if(this.thuActive){
+    this.timeValidator(this.thuTo,this.thuFrom,this.thuTimeTo,this.thuTimeFrom)
+  }  
+  if(this.friActive){
+    this.timeValidator(this.friTo,this.friFrom,this.friTimeTo,this.friTimeFrom)
+  }  
+  if(this.satActive){
+    this.timeValidator(this.satTo,this.satFrom,this.satTimeTo,this.satTimeFrom)
+  }
+}
   this.time = {
     sunTo: this.sunTo, 
     sunTimeTo:this.sunTimeTo,
@@ -399,7 +426,9 @@ addFacilityTime() {
   }
 }
 //********************************* Apply to all ************************ */
+isAllApplied
 applyToAllCheck(to,from,timeto,timefrom){
+  this.isAllApplied = true
  this.timeValidator(to,from,timeto,timefrom) 
 if(this.sunActive){
   this.sunTo = to;

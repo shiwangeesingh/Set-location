@@ -353,6 +353,7 @@ onItemSelect(item: any) {
   this.state =  this.selectedItems[0];
 }
 
+
 //********************************************** Add Facility ************************** */
 addFacilityTime() {
   this.time = {

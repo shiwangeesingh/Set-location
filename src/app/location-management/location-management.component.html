@@ -76,7 +76,7 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Location Name</label>
-                   <input type="text" class="form-control" maxlength="40" formControlName = "locationName" placeholder="Enter location"  [ngClass]="{ 'is-invalid': submitted && f.locationName.errors }"/>
+                   <input type="text" class="form-control" maxlength="40" formControlName = "locationName"  [ngClass]="{ 'is-invalid': submitted && f.locationName.errors }"/>
                    <div *ngIf="submitted && f.locationName.errors" class="invalid-feedback">
                     <div *ngIf="f.locationName.errors.required">Location name is required</div>
                   </div>
@@ -87,7 +87,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Address Line</label>
-                  <input type="text" class="form-control" maxlength="60" formControlName = "address" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
+                  <input type="text" class="form-control" maxlength="60" formControlName = "address"  [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
                   <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                     <div *ngIf="f.address.errors.required"><Address></Address> is required</div>
                   </div>
@@ -96,7 +96,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Suit No.</label>
-                  <input type="text" class="form-control" maxlength="15" formControlName = "suitNo" placeholder="Enter suit no." [ngClass]="{ 'is-invalid': submitted && f.suitNo.errors }"/>
+                  <input type="text" class="form-control" maxlength="15" formControlName = "suitNo"  [ngClass]="{ 'is-invalid': submitted && f.suitNo.errors }"/>
                   <div *ngIf="submitted && f.suitNo.errors" class="invalid-feedback">
                     <div *ngIf="f.suitNo.errors.required">Suit No. is required</div>
                   </div>
@@ -107,13 +107,13 @@
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Address Line 2</label>
-                  <input type="text" class="form-control"  maxlength="60" formControlName = "addressLine2" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }"/>
+                  <input type="text" class="form-control"  maxlength="60" formControlName = "addressLine2"  [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }"/>
                </div>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                   <label>city</label>
-                  <input type="text" class="form-control" maxlength="25" formControlName = "city" placeholder="Enter city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"/>
+                  <input type="text" class="form-control" maxlength="25" formControlName = "city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"/>
                   <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
                     <div *ngIf="f.city.errors.required">City name is required</div>
                   </div>
@@ -138,7 +138,7 @@
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Zip code</label>
-                  <input type="text" class="form-control" minlength="5" maxlength="15"  (keypress)="zipCodeValidator($event)"  formControlName = "zipCode" placeholder="Enter zip code" [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }"/>
+                  <input type="text" class="form-control" minlength="5" maxlength="15"  (keypress)="zipCodeValidator($event)"  formControlName = "zipCode"  [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }"/>
                   <div *ngIf="submitted && f.zipCode.errors" class="invalid-feedback">
                     <div *ngIf="f.zipCode.errors.maxlength">Zipcode should not exceed 15 charecters</div>
                     <div *ngIf="f.zipCode.errors.minlength">Zipcode should not be less than 5 charecters</div>
@@ -149,7 +149,7 @@
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Phone Number</label>
-                  <input type="text" class="form-control" maxlength="16"  placeholder="Enter phone number" [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}"  (change)="formatPhoneNumber()" />
+                  <input type="text" class="form-control" maxlength="16"   [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}"  (change)="formatPhoneNumber()" />
                </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -167,7 +167,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Facility Time</label>
-                  <button  class="form-control" placeholder="Set facility time"  data-toggle="modal" data-target="#time-modal"></button>
+                  <button  class="form-control" data-toggle="modal" data-target="#time-modal">Set facility time</button>
                </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -199,7 +199,7 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                   <label>Location Name</label>
-                   <input type="text" class="form-control" maxlength="40" formControlName = "locationName" placeholder="Enter location"  [ngClass]="{ 'is-invalid': submitted && e.locationName.errors }"/>
+                   <input type="text" class="form-control" maxlength="40" formControlName = "locationName"   [ngClass]="{ 'is-invalid': submitted && e.locationName.errors }"/>
                    <div *ngIf="submitted && e.locationName.errors" class="invalid-feedback">
                     <div *ngIf="e.locationName.errors.required">Location name is required</div>
                   </div>
@@ -211,7 +211,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Address Line</label>
-                  <input type="text" class="form-control" maxlength="60" formControlName = "address" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && e.address.errors }"/>
+                  <input type="text" class="form-control" maxlength="60" formControlName = "address"  [ngClass]="{ 'is-invalid': submitted && e.address.errors }"/>
                   <div *ngIf="submitted && e.address.errors" class="invalid-feedback">
                     <div *ngIf="e.address.errors.required"><Address></Address> is required</div>
                   </div>
@@ -220,7 +220,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Suit No.</label>
-                  <input type="text" class="form-control" maxlength="15" formControlName = "suitNo" placeholder="Enter suit no." [ngClass]="{ 'is-invalid': submitted && e.suitNo.errors }"/>
+                  <input type="text" class="form-control" maxlength="15" formControlName = "suitNo"  [ngClass]="{ 'is-invalid': submitted && e.suitNo.errors }"/>
                   <div *ngIf="submitted && e.suitNo.errors" class="invalid-feedback">
                     <div *ngIf="e.suitNo.errors.required">Suit No. is required</div>
                   </div>
@@ -231,13 +231,13 @@
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Address Line 2</label>
-                  <input type="text" class="form-control" maxlength="60" formControlName = "addressLine2" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && e.addressLine2.errors }"/>
+                  <input type="text" class="form-control" maxlength="60" formControlName = "addressLine2"  [ngClass]="{ 'is-invalid': submitted && e.addressLine2.errors }"/>
                </div>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                   <label>city</label>
-                  <input type="text" class="form-control" maxlength="25"  formControlName = "city" placeholder="Enter city" [ngClass]="{ 'is-invalid': submitted && e.city.errors }"/>
+                  <input type="text" class="form-control" maxlength="25"  formControlName = "city"  [ngClass]="{ 'is-invalid': submitted && e.city.errors }"/>
                   <div *ngIf="submitted && e.city.errors" class="invalid-feedback">
                     <div *ngIf="e.city.errors.required">City name is required</div>
                   </div>
@@ -262,7 +262,7 @@
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Zip code</label>
-                  <input type="text" class="form-control" minlength="5" maxlength="15"  (keypress)="zipCodeValidator($event)"  formControlName = "zipCode" placeholder="Enter zip code" [ngClass]="{ 'is-invalid': submitted && e.zipCode.errors }"/>
+                  <input type="text" class="form-control" minlength="5" maxlength="15"  (keypress)="zipCodeValidator($event)"  formControlName = "zipCode"  [ngClass]="{ 'is-invalid': submitted && e.zipCode.errors }"/>
                   <div *ngIf="submitted && e.zipCode.errors" class="invalid-feedback">
                     <div *ngIf="e.zipCode.errors.maxlength">Zipcode should not exceed 15 charecters</div>
                     <div *ngIf="e.zipCode.errors.minlength">Zipcode should not be less than 5 charecters</div>
@@ -273,7 +273,7 @@
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="form-group">
                   <label>Phone Number</label>
-                  <input type="text" class="form-control" maxlength="16"  placeholder="Enter phone number" [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}"  (change)="formatPhoneNumber()" />
+                  <input type="text" class="form-control" maxlength="16"   [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}"  (change)="formatPhoneNumber()" />
                </div>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -291,7 +291,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Facility Time</label>
-                  <button  class="form-control" placeholder="Set facility time" data-toggle="modal"  data-target="#time-modal"></button>
+                  <button  class="form-control" data-toggle="modal"  data-target="#time-modal">Set facility time</button>
                </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

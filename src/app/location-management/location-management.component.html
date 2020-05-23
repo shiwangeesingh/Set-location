@@ -1,0 +1,535 @@
+<div class="layout-main">
+<div class="targetPage"></div>
+<div class="sellerListPage ExplorerListPage">
+  <div class="layout-content">
+      <div class="layout-content-body">
+          <div class="title-bar">
+              <h1 class="title-bar-title">
+                <span class="d-ib">Location Management</span>
+              </h1>
+          </div>
+          <div class="row gutter-xs">
+              <div class="col-xs-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <button class="btn mb-3 btn-primary btn-md" style="float: right;" type="button" data-target="#addLocation" (click) = "reset()" data-toggle="modal"><i class="fa fa-plus-circle"></i> Add Location</button>
+                    </div>
+                      <div class="card-body">
+                        <div class="page-wrapper">
+                          <div class="page-body">
+                            <div class="dt-responsive table-responsive">
+                                <table class="table table-striped nowrap">
+                                <thead>
+                                    <tr *ngIf = "locationData.length">
+                                        <th>
+                                          S.No. <i id="pointer" class="fa fa-arrow-down" aria-hidden="true"(click)="sortAsc()"></i><i id="pointer" class="fa fa-arrow-up" (click)="sortDsc()" aria-hidden="true"></i>
+                                        </th>
+                                        <th>Location Name </th>
+                                        <th>Address</th>
+                                        <th>Phone Number</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf = "locationData">
+                                  <tr *ngIf = "locationData.length"> 
+                                  <tr *ngFor="let element of locationData | paginate: { itemsPerPage: 10, currentPage:page } ; let i = index;">
+                                    <td *ngIf="page == 1">{{i + 1}}</td>
+                                    <td *ngIf="page > 1">{{i + 1 + 10 * (page-1)}}</td>
+                                      <td>{{element.locationName}}</td>
+                                      <td>{{element.address}}</td>
+                                      <td>{{element.phoneNumber}}</td>
+                                      <td>
+                                      <button class="btn btn-info btn-sm fs-15 mr-2" type="button" (click)="edit(element)"
+                                      title="Edit target">
+                                      <i class="fa fa-pencil m-0"></i></button>
+                                      <button class="btn btn-danger btn-sm fs-15 mr-2" type="button" (click)="deleteLocation(element.id)"
+                                      title="Delete target">
+                                      <i class="fa fa-trash-o m-0"></i></button>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                                 <div *ngIf = "!locationData.length || !locationData" >
+                                  <img
+                                  src="../../assets/img/defaultImg.jpg"/>
+                                  </div>
+                              </table>
+                              <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+     <div id="addLocation" class="modal fade">
+      <div class="modal-dialog modal-md">
+         <div class="modal-content">
+           <div class="modal-body">
+            <h4>Add Location</h4>
+            <form [formGroup]="addLocationForm"  autocomplete="off">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Location Name</label>
+                   <input type="text" class="form-control" maxlength="40" formControlName = "locationName" placeholder="Enter location"  [ngClass]="{ 'is-invalid': submitted && f.locationName.errors }"/>
+                   <div *ngIf="submitted && f.locationName.errors" class="invalid-feedback">
+                    <div *ngIf="f.locationName.errors.required">Location name is required</div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Address Line</label>
+                  <input type="text" class="form-control" maxlength="60" formControlName = "address" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
+                  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required"><Address></Address> is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Suit No.</label>
+                  <input type="text" class="form-control" maxlength="15" formControlName = "suitNo" placeholder="Enter suit no." [ngClass]="{ 'is-invalid': submitted && f.suitNo.errors }"/>
+                  <div *ngIf="submitted && f.suitNo.errors" class="invalid-feedback">
+                    <div *ngIf="f.suitNo.errors.required">Suit No. is required</div>
+                  </div>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Address Line 2</label>
+                  <input type="text" class="form-control"  maxlength="60" formControlName = "addressLine2" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }"/>
+               </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="form-group">
+                  <label>city</label>
+                  <input type="text" class="form-control" maxlength="25" formControlName = "city" placeholder="Enter city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"/>
+                  <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                    <div *ngIf="f.city.errors.required">City name is required</div>
+                  </div>
+               </div>
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <div class="form-group">
+                  <label>State</label>
+                  <ng-multiselect-dropdown #productId="ngModel"
+                    [placeholder]="'Select State'"
+                    [data]="dropdownList"
+                    [(ngModel)]="selectedItems"
+                    [settings]="dropdownSettings"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    [ngModelOptions]="{standalone: true}" >
+                  </ng-multiselect-dropdown>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Zip code</label>
+                  <input type="text" class="form-control" minlength="5" maxlength="15"  (keypress)="zipCodeValidator($event)"  formControlName = "zipCode" placeholder="Enter zip code" [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }"/>
+                  <div *ngIf="submitted && f.zipCode.errors" class="invalid-feedback">
+                    <div *ngIf="f.zipCode.errors.maxlength">Zipcode should not exceed 15 charecters</div>
+                    <div *ngIf="f.zipCode.errors.minlength">Zipcode should not be less than 5 charecters</div>
+                    <div *ngIf="f.zipCode.errors.required">Zip code is required</div>
+                  </div>
+               </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" maxlength="16"  placeholder="Enter phone number" [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}"  (change)="formatPhoneNumber()" />
+               </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Time Zone</label>
+                  <select class="form-control"  formControlName= "timeZone" *ngIf = "timezoneList.length">
+                    <option value=''>Select time zone </option>
+                    <option class="form-control" *ngFor="let item of timezoneList" [value] = "item" >
+                      {{item}}</option>
+                  </select>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Facility Time</label>
+                  <button  class="form-control" placeholder="Set facility time"  data-toggle="modal" data-target="#time-modal"></button>
+               </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label>Appointment pool</label>
+                    <input id = "tag" type="text" class="form-control"   placeholder="Appointment pool"  autocomplete="off" />
+               </div>
+              </div>
+            </div>
+             <div class="text-center">
+               <div class="m-t-lg">
+                 <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="addLocation()" type="submit">Save</button>
+                 <button class="btn btn-danger" data-dismiss="modal" type="button" (click)= "reset()">Cancel</button>
+               </div>
+             </div>
+            </form>
+           </div>
+         </div>
+       </div>      
+     </div>
+
+     <div id="editLocation" class="modal fade">
+      <div class="modal-dialog modal-md">
+         <div class="modal-content">
+           <div class="modal-body">
+            <h4>Edit Location</h4>
+            <form [formGroup]="editLocationForm"  autocomplete="off">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label>Location Name</label>
+                   <input type="text" class="form-control" maxlength="40" formControlName = "locationName" placeholder="Enter location"  [ngClass]="{ 'is-invalid': submitted && e.locationName.errors }"/>
+                   <div *ngIf="submitted && e.locationName.errors" class="invalid-feedback">
+                    <div *ngIf="e.locationName.errors.required">Location name is required</div>
+                  </div>
+                  </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Address Line</label>
+                  <input type="text" class="form-control" maxlength="60" formControlName = "address" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && e.address.errors }"/>
+                  <div *ngIf="submitted && e.address.errors" class="invalid-feedback">
+                    <div *ngIf="e.address.errors.required"><Address></Address> is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Suit No.</label>
+                  <input type="text" class="form-control" maxlength="15" formControlName = "suitNo" placeholder="Enter suit no." [ngClass]="{ 'is-invalid': submitted && e.suitNo.errors }"/>
+                  <div *ngIf="submitted && e.suitNo.errors" class="invalid-feedback">
+                    <div *ngIf="e.suitNo.errors.required">Suit No. is required</div>
+                  </div>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Address Line 2</label>
+                  <input type="text" class="form-control" maxlength="60" formControlName = "addressLine2" placeholder="Enter address" [ngClass]="{ 'is-invalid': submitted && e.addressLine2.errors }"/>
+               </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="form-group">
+                  <label>city</label>
+                  <input type="text" class="form-control" maxlength="25"  formControlName = "city" placeholder="Enter city" [ngClass]="{ 'is-invalid': submitted && e.city.errors }"/>
+                  <div *ngIf="submitted && e.city.errors" class="invalid-feedback">
+                    <div *ngIf="e.city.errors.required">City name is required</div>
+                  </div>
+               </div>
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                <div class="form-group">
+                  <label>State</label>
+                  <ng-multiselect-dropdown #productId="ngModel"
+                    [placeholder]="'Select State'"
+                    [data]="dropdownList"
+                    [(ngModel)]="selectedItems"
+                    [settings]="dropdownSettings"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    [ngModelOptions]="{standalone: true}" >
+                  </ng-multiselect-dropdown>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Zip code</label>
+                  <input type="text" class="form-control" minlength="5" maxlength="15"  (keypress)="zipCodeValidator($event)"  formControlName = "zipCode" placeholder="Enter zip code" [ngClass]="{ 'is-invalid': submitted && e.zipCode.errors }"/>
+                  <div *ngIf="submitted && e.zipCode.errors" class="invalid-feedback">
+                    <div *ngIf="e.zipCode.errors.maxlength">Zipcode should not exceed 15 charecters</div>
+                    <div *ngIf="e.zipCode.errors.minlength">Zipcode should not be less than 5 charecters</div>
+                    <div *ngIf="e.zipCode.errors.required">Zip code is required</div>
+                  </div>
+               </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" maxlength="16"  placeholder="Enter phone number" [(ngModel)]="phoneNumber" [ngModelOptions]="{standalone: true}"  (change)="formatPhoneNumber()" />
+               </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Time Zone</label>
+                  <select class="form-control"  formControlName= "timeZone" *ngIf = "timezoneList.length">
+                    <option value=''>Select time zone </option>
+                    <option class="form-control" *ngFor="let item of timezoneList" [value] = "item" >
+                      {{item}}</option>
+                  </select>
+               </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Facility Time</label>
+                  <button  class="form-control" placeholder="Set facility time" data-toggle="modal"  data-target="#time-modal"></button>
+               </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label>Appointment pool</label>
+                  <input id = "tag1" type="text" class="form-control"   placeholder="Appointment pool" />
+                </div>
+              </div>
+            </div>
+             <div class="text-center">
+               <div class="m-t-lg">
+                 <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" (click)="editLocation()" type="submit">Save</button>
+                 <button class="btn btn-danger" data-dismiss="modal" type="button">Cancel</button>
+               </div>
+             </div>
+            </form>
+           </div>
+         </div>
+       </div>      
+     </div>
+
+   <div class="modal fade" id="time-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="popup_login">
+                           <h5>Facility Times</h5>
+						   <div class="table-responsive">
+						   		<table class="table table-borderless">
+								   <thead>
+								   	<tr>
+									   <th>Days</th>
+									   <th>From</th>
+									   <th>To</th>
+									   <th>Action</th>
+									</tr>
+								   </thead>
+								   <tbody>
+                   
+								   	<tr>
+									   <td><label><input type="checkbox" [ngModelOptions]="{ standalone: true }" [(ngModel)]= "sunActive"  name="days"/><span>Sun</span></label></td>
+									   <td>
+									   <div class="d-flex">
+									   <input type="time" name="from" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "sunFrom"/>
+									   <div>
+									   	<ul>
+										   <li><label><input type="radio" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "sunTimeFrom" name="from-am"value = "AM"  hidden/><span>AM</span></label></li>
+										   <li><label><input type="radio" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "sunTimeFrom" name="from-am" value = "PM" hidden/><span>PM</span></label></li>
+										</ul>
+									   </div>
+									   </div>
+									   </td>
+									   <td>
+									   <div class="d-flex">
+									   <input type="time" name="to" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "sunTo"/>
+									   <div>
+									   	<ul>
+										   <li><label><input type="radio" name="sun-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "sunTimeTo"hidden value = "AM"/><span>AM</span></label></li>
+										   <li><label><input type="radio" name="sun-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "sunTimeTo"value = "PM" hidden/><span>PM</span></label></li>
+										</ul>
+									   </div>
+									   </div>
+									   </td>
+									   <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(sunTo,sunFrom,sunTimeTo,sunTimeFrom)">Apply to all checked</button></td>
+									</tr>
+									<tr>
+									   <td><label><input type="checkbox" name="days"  [ngModelOptions]="{ standalone: true }" [(ngModel)]= "monActive" /><span>Mon</span></label></td>
+									   <td>
+									   <div class="d-flex">
+									   <input type="time" name="from" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "monFrom"/>
+									   <div>
+									   	<ul>
+										   <li><label><input type="radio" name="sun-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "monTimeFrom" value = "AM" hidden/><span>AM</span></label></li>
+										   <li><label><input type="radio" name="sun-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "monTimeFrom" value = "PM"hidden/><span>PM</span></label></li>
+										</ul>
+									   </div>
+									   </div>
+									   </td>
+									   <td>
+									   <div class="d-flex">
+									   <input type="time" name="to"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "monTo"/>
+									   <div>
+									   	<ul>
+										   <li><label><input type="radio" name="mon-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "monTimeTo" value = "AM" hidden/><span>AM</span></label></li>
+										   <li><label><input type="radio" name="mon-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "monTimeTo" value = "PM" hidden/><span>PM</span></label></li>
+										</ul>
+									   </div>
+									   </div>
+									   </td>
+									   <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(monTo,monFrom,monTimeTo,monTimeFrom)">Apply to all checked</button></td>
+									</tr>
+									<tr>
+									   <td><label><input type="checkbox" name="days"  [ngModelOptions]="{ standalone: true }" [(ngModel)]= "tueActive"/><span>Tue</span></label></td>
+									   <td>
+									   <div class="d-flex">
+									   <input type="time" name="from"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "tueFrom"/>
+									   <div>
+									   	<ul>
+										   <li><label><input type="radio" name="mon-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "tueTimeFrom" value = "AM" hidden/><span>AM</span></label></li>
+										   <li><label><input type="radio" name="mon-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "tueTimeFrom" value = "PM" hidden/><span>PM</span></label></li>
+										</ul>
+									   </div>
+									   </div>
+									   </td>
+									   <td>
+									   <div class="d-flex">
+									   <input type="time" name="to"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "tueTo"/>
+									   <div>
+									   	<ul>
+										   <li><label><input type="radio" name="tue-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "tueTimeTo" value = "AM" hidden/><span>AM</span></label></li>
+										   <li><label><input type="radio" name="tue-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "tueTimeTo" value = "PM" hidden/><span>PM</span></label></li>
+										</ul>
+									   </div>
+									   </div>
+									   </td>
+									   <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(tueTo,tueFrom,tueTimeTo,tueTimeFrom)">Apply to all checked</button></td>
+                  </tr>
+                  <tr>
+                    <td><label><input type="checkbox" name="days"  [ngModelOptions]="{ standalone: true }" [(ngModel)]= "wedActive"/><span>Wed</span></label></td>
+                    <td>
+                    <div class="d-flex">
+                    <input type="time" name="from"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "wedFrom"/>
+                    <div>
+                      <ul>
+                      <li><label><input type="radio" name="wed-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "wedTimeFrom" value = "AM" hidden/><span>AM</span></label></li>
+                      <li><label><input type="radio" name="wed-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "wedTimeFrom" value = "PM" hidden/><span>PM</span></label></li>
+                   </ul>
+                    </div>
+                    </div>
+                    </td>
+                    <td>
+                    <div class="d-flex">
+                    <input type="time" name="to"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "wedTo"/>
+                    <div>
+                      <ul>
+                      <li><label><input type="radio" name="wed-to-am"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "wedTimeTo"value = "AM" hidden/><span>AM</span></label></li>
+                      <li><label><input type="radio" name="wed-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "wedTimeTo" value = "PM"hidden/><span>PM</span></label></li>
+                   </ul>
+                    </div>
+                    </div>
+                    </td>
+                    <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(wedTo,wedFrom,wedTimeTo,wedTimeFrom)">Apply to all checked</button></td>
+                 </tr>
+                 <tr>
+                  <td><label><input type="checkbox" name="days"  [ngModelOptions]="{ standalone: true }" [(ngModel)]= "thuActive"/><span>Thu</span></label></td>
+                  <td>
+                  <div class="d-flex">
+                  <input type="time" name="from"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "thuFrom"/>
+                  <div>
+                    <ul>
+                    <li><label><input type="radio" name="thu-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "thuTimeFrom" value = "AM"hidden/><span>AM</span></label></li>
+                    <li><label><input type="radio" name="thu-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "thuTimeFrom" value = "PM" hidden/><span>PM</span></label></li>
+                 </ul>
+                  </div>
+                  </div>
+                  </td>
+                  <td>
+                  <div class="d-flex">
+                  <input type="time" name="to"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "thuTo"/>
+                  <div>
+                    <ul>
+                    <li><label><input type="radio" name="thu-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "thuTimeTo" value = "AM" hidden/><span>AM</span></label></li>
+                    <li><label><input type="radio" name="thu-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "thuTimeTo" value = "PM"hidden/><span>PM</span></label></li>
+                 </ul>
+                  </div>
+                  </div>
+                  </td>
+                  <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(thuTo,thuFrom,thuTimeTo,thuTimeFrom)">Apply to all checked</button></td>
+               </tr>
+               <tr>
+                <td><label><input type="checkbox" name="days"  [ngModelOptions]="{ standalone: true }" [(ngModel)]= "friActive"/><span>Fri</span></label></td>
+                <td>
+                <div class="d-flex">
+                <input type="time" name="from"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "friFrom"/>
+                <div>
+                  <ul>
+                  <li><label><input type="radio" name="fri-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "friTimeFrom" value = "AM" hidden/><span>AM</span></label></li>
+                  <li><label><input type="radio" name="fri-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "friTimeFrom" value = "PM" hidden/><span>PM</span></label></li>
+               </ul>
+                </div>
+                </div>
+                </td>
+                <td>
+                <div class="d-flex">
+                <input type="time" name="to"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "friFrom"/>
+                <div>
+                  <ul>
+                  <li><label><input type="radio" name="fri-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "friTimeTo" value = "AM" hidden/><span>AM</span></label></li>
+                  <li><label><input type="radio" name="fri-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "friTimeTo" value = "PM" hidden/><span>PM</span></label></li>
+               </ul>
+                </div>
+                </div>
+                </td>
+                <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(friTo,friFrom,friTimeTo,friTimeFrom)">Apply to all checked</button></td>
+             </tr>
+             <tr>
+              <td><label><input type="checkbox" name="days"  [ngModelOptions]="{ standalone: true }" [(ngModel)]= "satActive"/><span>Sat</span></label></td>
+              <td>
+              <div class="d-flex">
+              <input type="time" name="from"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "satFrom"/>
+              <div>
+                <ul>
+                <li><label><input type="radio" name="sat-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "satTimeFrom" value = "AM"hidden/><span>AM</span></label></li>
+                <li><label><input type="radio" name="sat-from-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "satTimeFrom" value = "PM" hidden/><span>PM</span></label></li>
+             </ul>
+              </div>
+              </div>
+              </td>
+              <td>
+              <div class="d-flex">
+              <input type="time" name="to"  [ngModelOptions]="{ standalone: true }" [(ngModel)] = "satTo"/>
+              <div>
+                <ul>
+                <li><label><input type="radio" name="sat-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "satTimeTo" value = "AM"hidden/><span>AM</span></label></li>
+                <li><label><input type="radio" name="sat-to-am" [ngModelOptions]="{ standalone: true }" [(ngModel)] = "satTimeTo" value = "PM"hidden/><span>PM</span></label></li>
+             </ul>
+              </div>
+              </div>
+              </td>
+              <td><button class="btn btn-apply  btn-sm" (click)="applyToAllCheck(satTo,satFrom,satTimeTo,satTimeFrom)">Apply to all checked</button></td>
+           </tr>
+          
+								   </tbody>
+							   </table>
+						   </div>
+						   <div class="w-100 text-right">
+						   <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+						   <button class="btn btn-success" data-dismiss="modal" (click)="addFacilityTime()">Save</button>
+               </div>
+              </div>
+            </div>
+          </div>
+          </div>
+    	</div>
+    </div>
+</div>

@@ -123,7 +123,7 @@ let data = {
   addressLine2: this.addLocationForm.value.addressLine2?this.addLocationForm.value.addressLine2:"",
   zipCode: this.addLocationForm.value.zipCode?this.addLocationForm.value.zipCode:"",
   timeZone: this.addLocationForm.value.timeZone?this.addLocationForm.value.timeZone:"",
-  facilityTime: this.time?this.time:{},
+  facilityTime: this.time,
   appointmentPool: $("#tag").val(),
   city: this.addLocationForm.value.city?this.addLocationForm.value.city:"",
   state: this.state,   
@@ -195,6 +195,7 @@ deleteLocation(id){
 stateId
 stateName
 edit(data){
+  $('#tag1').tagsinput('removeAll');
 this.getStates()
 this.editLocationForm.patchValue({
   locationName: data.locationName,
@@ -240,6 +241,7 @@ this.satTo = data.facilityTime.satTo
 this.satTimeTo = data.facilityTime.satTimeTo
 this.satFrom = data.facilityTime.satFrom
 this.satTimeFrom = data.facilityTime.satTimeFrom
+this.addFacilityTime()
 $('#editLocation').modal('toggle');
 }
 
@@ -259,7 +261,7 @@ let data = {
   addressLine2: this.editLocationForm.value.addressLine2?this.editLocationForm.value.addressLine2:"",
   zipCode: this.editLocationForm.value.zipCode?this.editLocationForm.value.zipCode:"",
   timeZone: this.editLocationForm.value.timeZone?this.editLocationForm.value.timeZone:"",
-  facilityTime: this.time?this.time:{},
+  facilityTime: this.time,
   appointmentPool: $('#tag1').val(),
   city: this.editLocationForm.value.city?this.editLocationForm.value.city:"",
   state: this.state?this.state:"",   
@@ -271,6 +273,7 @@ this.db.openDatabase(1,  evt => {
 self.db.update('location', data).then(
   () => {
     self.getLocationData()
+    $('#tag1').tagsinput('removeAll');
   },
   error => {
       console.log(error);

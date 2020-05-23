@@ -63,6 +63,9 @@ export class LocationManagementComponent implements OnInit {
   selectedItems
   page = 1
   phoneNumber
+  isAllApplied
+  stateId
+  stateName
   constructor(
     private formBuilder: FormBuilder,  
     ) { }
@@ -194,8 +197,7 @@ deleteLocation(id){
 
 //************************************************** Edit ***************************************** */
 //***********************Patch data ****************************** */
-stateId
-stateName
+
 edit(data){
 this.isAllApplied = false
 $('#tag1').tagsinput('removeAll');
@@ -356,11 +358,9 @@ pageChange(page){
   this.getLocationData();
 }
 
-
 onItemSelect(item: any) {
   this.state =  this.selectedItems[0];
 }
-
 
 //********************************************** Add Facility ************************** */
 addFacilityTime() {
@@ -426,7 +426,6 @@ addFacilityTime() {
   }
 }
 //********************************* Apply to all ************************ */
-isAllApplied
 applyToAllCheck(to,from,timeto,timefrom){
   this.isAllApplied = true
  this.timeValidator(to,from,timeto,timefrom) 

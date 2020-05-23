@@ -321,7 +321,7 @@ this.friActive = false
 this.satActive = false
 this.phoneNumber = ""
 this.state = ""
-$('#tag').val('')
+$('#tag').tagsinput('removeAll');
 this.selectedItems = []
 this.getStates()
 this.getTimeZoneList()

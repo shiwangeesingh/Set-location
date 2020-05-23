@@ -242,6 +242,7 @@ this.satTimeTo = data.facilityTime.satTimeTo
 this.satFrom = data.facilityTime.satFrom
 this.satTimeFrom = data.facilityTime.satTimeFrom
 this.addFacilityTime()
+this.onItemSelect(this.selectedItems)
 $('#editLocation').modal('toggle');
 }
 

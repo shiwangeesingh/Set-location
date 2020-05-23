@@ -202,7 +202,7 @@ this.editLocationForm.patchValue({
   zipCode: data.zipCode,
   timeZone: data.timeZone
 })
-$('#tag1').val('data.appointmentPool') 
+$('#tag1').val(data.appointmentPool) 
 this.phoneNumber = data.phoneNumber,
 this.item = data.timeZone
 this.selectedItems = [data.state]

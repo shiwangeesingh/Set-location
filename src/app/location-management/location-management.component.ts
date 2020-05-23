@@ -400,6 +400,7 @@ addFacilityTime() {
 }
 //********************************* Apply to all ************************ */
 applyToAllCheck(to,from,timeto,timefrom){
+ this.timeValidator(to,from,timeto,timefrom) 
 if(this.sunActive){
   this.sunTo = to;
   this.sunFrom = from;
@@ -440,6 +441,37 @@ if(this.monActive){
 this.addFacilityTime()
 }
 
+timeValidator(to,from,toFormat,fromFormat){
+if(toFormat == "PM"){
+  var toNew = to.split(':')
+  var toHr = Number(toNew[0]) + 12
+  var toMn = toNew[1]
+}
+else{
+  var toNew = to.split(':')
+  var toHr = Number(toNew[0])
+  var toMn = toNew[1]
+}
+if(fromFormat == "PM"){
+  var fromNew = from.split(':')
+  var fromHr = Number(fromNew[0]) + 12
+  var fromMn = fromNew[1]
+}
+else{
+  var fromNew = from.split(':')
+  var fromHr = Number(fromNew[0])
+  var fromMn = fromNew[1]
+}
+if(fromHr > toHr){
+  alert("Invalid date")
+  return
+}
+if(fromHr == toHr && fromMn > toMn)
+{
+  alert("Invalid date")
+  return
+}
+}
 //*************************** Mobile number format ******************** */
 formatPhoneNumber() {
    let phoneNumberString =this.phoneNumber;

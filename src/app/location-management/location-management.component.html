@@ -88,18 +88,12 @@
                 <div class="form-group">
                   <label>Address Line</label>
                   <input type="text" class="form-control" maxlength="60" formControlName = "address"  [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
-                  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                    <div *ngIf="f.address.errors.required"><Address></Address> is required</div>
-                  </div>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Suit No.</label>
                   <input type="text" class="form-control" maxlength="15" formControlName = "suitNo"  [ngClass]="{ 'is-invalid': submitted && f.suitNo.errors }"/>
-                  <div *ngIf="submitted && f.suitNo.errors" class="invalid-feedback">
-                    <div *ngIf="f.suitNo.errors.required">Suit No. is required</div>
-                  </div>
                </div>
               </div>
             </div>
@@ -114,9 +108,6 @@
                 <div class="form-group">
                   <label>city</label>
                   <input type="text" class="form-control" maxlength="25" formControlName = "city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }"/>
-                  <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                    <div *ngIf="f.city.errors.required">City name is required</div>
-                  </div>
                </div>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -142,7 +133,6 @@
                   <div *ngIf="submitted && f.zipCode.errors" class="invalid-feedback">
                     <div *ngIf="f.zipCode.errors.maxlength">Zipcode should not exceed 15 charecters</div>
                     <div *ngIf="f.zipCode.errors.minlength">Zipcode should not be less than 5 charecters</div>
-                    <div *ngIf="f.zipCode.errors.required">Zip code is required</div>
                   </div>
                </div>
               </div>
@@ -212,18 +202,12 @@
                 <div class="form-group">
                   <label>Address Line</label>
                   <input type="text" class="form-control" maxlength="60" formControlName = "address"  [ngClass]="{ 'is-invalid': submitted && e.address.errors }"/>
-                  <div *ngIf="submitted && e.address.errors" class="invalid-feedback">
-                    <div *ngIf="e.address.errors.required"><Address></Address> is required</div>
-                  </div>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
                   <label>Suit No.</label>
                   <input type="text" class="form-control" maxlength="15" formControlName = "suitNo"  [ngClass]="{ 'is-invalid': submitted && e.suitNo.errors }"/>
-                  <div *ngIf="submitted && e.suitNo.errors" class="invalid-feedback">
-                    <div *ngIf="e.suitNo.errors.required">Suit No. is required</div>
-                  </div>
                </div>
               </div>
             </div>
@@ -238,9 +222,6 @@
                 <div class="form-group">
                   <label>city</label>
                   <input type="text" class="form-control" maxlength="25"  formControlName = "city"  [ngClass]="{ 'is-invalid': submitted && e.city.errors }"/>
-                  <div *ngIf="submitted && e.city.errors" class="invalid-feedback">
-                    <div *ngIf="e.city.errors.required">City name is required</div>
-                  </div>
                </div>
               </div>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
@@ -266,7 +247,6 @@
                   <div *ngIf="submitted && e.zipCode.errors" class="invalid-feedback">
                     <div *ngIf="e.zipCode.errors.maxlength">Zipcode should not exceed 15 charecters</div>
                     <div *ngIf="e.zipCode.errors.minlength">Zipcode should not be less than 5 charecters</div>
-                    <div *ngIf="e.zipCode.errors.required">Zip code is required</div>
                   </div>
                </div>
               </div>

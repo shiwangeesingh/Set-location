@@ -1420,6 +1420,8 @@ body{
   margin-left:3px;
   font-size:11px;
  }
+ .bootstrap-tagsinput input {min-width: 254px;}
+ 
  #tags > input{
    background:#eee;
    border:0;

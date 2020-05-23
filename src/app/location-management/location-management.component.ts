@@ -82,22 +82,22 @@ export class LocationManagementComponent implements OnInit {
     //*****************************Add form ******************* */
     this.addLocationForm = this.formBuilder.group({
       locationName: ['',[Validators.required]],
-      suitNo: ['',[Validators.required]],
+      suitNo: ['',],
       address: ['',],
       addressLine2: ['',],
-      city: ['',[Validators.required]],
-      zipCode: ['',[Validators.required,Validators.maxLength(15),Validators.minLength(5)]],
-      timeZone: ['',[Validators.required]],
+      city: ['',],
+      zipCode: ['',[Validators.maxLength(15),Validators.minLength(5)]],
+      timeZone: ['',],
   })
   //*********************************Edit form ********************* */
   this.editLocationForm = this.formBuilder.group({
     locationName: ['',[Validators.required]],
-    suitNo: ['',[Validators.required]],
+    suitNo: ['',],
     address: ['',],
     addressLine2: ['',],
-    city: ['',[Validators.required]],
-    zipCode: ['',[Validators.required,Validators.maxLength(15),Validators.minLength(5)]],
-    timeZone: ['',[Validators.required]],
+    city: ['',],
+    zipCode: ['',[Validators.maxLength(15),Validators.minLength(5)]],
+    timeZone: ['',],
 })
 //*************************************Db setup ********************** */
 self.db.openDatabase(1,  evt => {
@@ -285,12 +285,12 @@ self.db.update('location', data).then(
 reset(){
   this.addLocationForm = this.formBuilder.group({
     locationName: ['',[Validators.required]],
-    suitNo: ['',[Validators.required]],
+    suitNo: ['',],
     address: ['',],
     addressLine2: ['',],
-    city: ['',[Validators.required]],
-    zipCode: ['',[Validators.required,Validators.maxLength(15),Validators.minLength(5)]],
-    timeZone: ['',[Validators.required]],
+    city: ['',],
+    zipCode: ['',[Validators.maxLength(15),Validators.minLength(5)]],
+    timeZone: ['',],
 })
 this.sunTo = undefined 
 this.sunTimeTo  = undefined
